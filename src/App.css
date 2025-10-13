@@ -1,4 +1,4 @@
-#root {
+/* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +39,64 @@
 
 .read-the-docs {
   color: #888;
+} */
+.App {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(10, 50px);
+  grid-gap: 5px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.grid-item {
+  padding: 10px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.grid-item.prime {
+  border: 2px solid gold;
+}
+
+.grid-item.done {
+  background-color: #c8e6c9;
+}
+
+.modal {
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: white;
+  border: 2px solid #333;
+  padding: 20px;
+  z-index: 10;
+  border-radius: 10px;
+}
+
+input {
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.results {
+  margin-top: 20px;
+}
+
+.correct {
+  color: green;
+  margin-right: 5px;
+}
+
+.incorrect {
+  color: red;
+  margin-right: 5px;
 }
