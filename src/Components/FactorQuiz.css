@@ -101,7 +101,7 @@
   background-color: #f3f4f6;
 }
 
-.btn-submit, .btn-retry {
+.btn-submit, .btn-retry .btn-checkall{
   width: 100%;
   padding: 6px 10px;
   border-radius: 6px;
@@ -110,6 +110,11 @@
   cursor: pointer;
   font-size: 0.9rem;
   margin-top: 4px;
+}
+.btn-checkall {
+  background-color: #10b981;
+  color: white;
+  width:40%;
 }
 
 .btn-submit {
@@ -138,7 +143,7 @@
 
 .result-correct { color: #16a34a; }
 .result-incorrect { color: #dc2626; }
-.result-missing { color: #ea580c; }
+.result-missing { color: #8e0693; }
 .result-perfect { text-align: center; font-weight: bold; color: #16a34a; margin-top: 4px; }
 
 /* Instructions */

@@ -73,9 +73,11 @@ const FactorQuiz = () => {
 
   return (
     <div className="factor-quiz-container">
-      <h1 className="quiz-title">Number Factor Quiz</h1>
+      {/* <h1 className="quiz-title">Number Factor Quiz</h1> */}
+       <h1 className="quiz-title">1-100 因數挑戰  - 基礎級</h1>
       <p className="quiz-subtitle">
-        Enter all factors for each number (separated by commas), then click Submit
+        {/* Enter all factors for each number (separated by commas), then click Submit */}
+        輸入每個數字的所有因數（以逗號分隔），然後點擊提交
       </p>
 
       <div className="number-grid">
@@ -90,7 +92,8 @@ const FactorQuiz = () => {
             >
               <div className="number-header">
                 <h3 className="number-title">{number}</h3>
-                {prime && <span className="prime-badge">PRIME</span>}
+                {/* {prime && <span className="prime-badge">PRIME</span>} */}
+                {prime && <span className="prime-badge">質數</span>}
               </div>
 
               <input
@@ -107,28 +110,32 @@ const FactorQuiz = () => {
                   onClick={() => handleSubmit(number, factors)}
                   className="btn btn-submit"
                 >
-                  Submit
+                  提交
                 </button>
               ) : (
                 <div className="result-section">
                   {result.correct.length > 0 && (
                     <div className="result-correct">
-                      ✓ Correct: {result.correct.join(', ')}
+                      {/* ✓ Correct: {result.correct.join(', ')} */}
+                        ✅ <strong>正確因數</strong>：{result.correct.join('、')}
                     </div>
                   )}
                   {result.incorrect.length > 0 && (
                     <div className="result-incorrect">
-                      ✗ Incorrect: {result.incorrect.join(', ')}
+                      {/* ✗ Incorrect: {result.incorrect.join(', ')} */}
+                        ❌ <strong>錯誤因數</strong>：{result.incorrect.join('、')}（請移除）
                     </div>
                   )}
                   {result.missing.length > 0 && (
                     <div className="result-missing">
-                      ⚠ Missing: {result.missing.join(', ')}
+                      {/* ⚠ Missing: {result.missing.join(', ')} */}
+                        ⚠ 缺少的因數: {result.missing.join(', ')}（請補充）
                     </div>
                   )}
                   {result.correct.length === factors.length &&
                     result.incorrect.length === 0 && (
-                      <div className="result-perfect">🎉 Perfect!</div>
+                    //   <div className="result-perfect">🎉 Perfect!</div>
+                        <div className="result-perfect">🎉 全部正確！太棒了！</div>
                     )}
 
                   <button
@@ -138,7 +145,8 @@ const FactorQuiz = () => {
                     }}
                     className="btn btn-retry"
                   >
-                    Try Again
+                    {/* Try Again */}
+                    再試一次
                   </button>
                 </div>
               )}
@@ -147,7 +155,7 @@ const FactorQuiz = () => {
         })}
       </div>
 
-      <div className="instructions">
+      {/* <div className="instructions">
         <h2>Instructions:</h2>
         <ul>
           <li>Enter all factors of each number separated by commas (e.g., "1, 2, 4")</li>
@@ -156,7 +164,7 @@ const FactorQuiz = () => {
           <li>Green shows correct factors, red shows incorrect ones, orange shows missing factors</li>
           <li>Click "Try Again" to reset and try again</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

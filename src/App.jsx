@@ -8,16 +8,19 @@ function App() {
   return (
     <Router>
       <nav style={styles.nav}>
-        <Link to="/quiz" style={styles.link}>Factor Quiz</Link>
-        <Link to="/practice" style={styles.link}>Higher Level Practice</Link>
-         <Link to="/level3" style={styles.link}>Level 3</Link>
+        {/* <Link to="/level1" style={styles.link}>Level 1</Link>
+        <Link to="/level2" style={styles.link}>Level 2</Link>
+         <Link to="/level3" style={styles.link}>Level 3</Link> */}
+         <Link to="/level1" style={styles.link}>基礎</Link>
+        <Link to="/level2" style={styles.link}>進階</Link>
+         <Link to="/level3" style={styles.link}>高手</Link>
       </nav>
 
       <div style={styles.content}>
         <Routes>
           <Route path="/" element={<FactorQuiz />} />
-          <Route path="/quiz" element={<FactorQuiz />} />
-          <Route path="/practice" element={<HigherLevelPractice />} />
+          <Route path="/level1" element={<FactorQuiz />} />
+          <Route path="/level2" element={<HigherLevelPractice />} />
            <Route path="/level3" element={<FullQuizLevel />} />
         </Routes>
       </div>

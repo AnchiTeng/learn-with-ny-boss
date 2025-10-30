@@ -70,10 +70,12 @@ const HigherLevelPractice = () => {
 
   return (
     <div className="factor-quiz-container">
-      <h1 className="quiz-title">Factor Master Challenge</h1>
+      {/* <h1 className="quiz-title">Factor Master Challenge</h1> */}
+        <h1 className="quiz-title">1-100 因數挑戰  - 進階級</h1>
       <p className="quiz-subtitle">
-        Enter all factors for each number (separated by commas). You’ll only see
-        how many are correct or missing.
+        {/* Enter all factors for each number (separated by commas). You’ll only see
+        how many are correct or missing. */}
+        請輸入每個數字的所有因數（以逗號分隔）。您只會看到答對與遺漏的「數量」
       </p>
 
       <div className="number-grid">
@@ -85,7 +87,8 @@ const HigherLevelPractice = () => {
             <div key={number} className={`number-card ${prime ? "prime" : ""}`}>
               <div className="number-header">
                 <h3 className="number-title">{number}</h3>
-                {prime && <span className="prime-badge">PRIME</span>}
+                {/* {prime && <span className="prime-badge">PRIME</span>} */}
+                {prime && <span className="prime-badge">質數</span>}
               </div>
 
               <input
@@ -102,7 +105,8 @@ const HigherLevelPractice = () => {
                   onClick={() => handleSubmit(number, factors)}
                   className="btn btn-submit"
                 >
-                  Submit
+                  {/* Submit */}
+                    提交
                 </button>
               ) : (
                 <div className="result-section">
@@ -111,10 +115,12 @@ const HigherLevelPractice = () => {
                   ) : (
                     <>
                       <div className="result-summary">
-                        ✅ {result.correct.length} correct
+                        {/* ✅ {result.correct.length} correct */}
+                        ✅ 答對 {result.correct.length} 個因數
                       </div>
                       <div className="result-summary">
-                        ⚠ {result.missing.length} missing
+                        {/* ⚠ {result.missing.length} missing */}
+                        ⚠ 尚缺{result.missing.length} 個因數 （請補充）
                       </div>
                     </>
                   )}
@@ -125,7 +131,8 @@ const HigherLevelPractice = () => {
                     }}
                     className="btn btn-retry"
                   >
-                    Try Again
+                    {/* Try Again */}
+                        再試一次
                   </button>
                 </div>
               )}
@@ -134,7 +141,7 @@ const HigherLevelPractice = () => {
         })}
       </div>
 
-      <div className="instructions">
+      {/* <div className="instructions">
         <h2>Instructions:</h2>
         <ul>
           <li>Type all factors separated by commas (e.g., "1, 2, 4").</li>
@@ -144,7 +151,7 @@ const HigherLevelPractice = () => {
           </li>
           <li>Try to reach a perfect score for each number!</li>
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };
