@@ -60,20 +60,20 @@ const FullQuizLevel = () => {
 
   const handleCheckAll = () => {
     if(!checked) {
-    let newResults = {};
-    let totalScore = 0;
+      let newResults = {};
+      let totalScore = 0;
 
-    numbers.forEach(({ number, factors }) => {
-      const result = checkAnswer(number, factors);
-      const isPerfect = result.correct.length === factors.length;
-      newResults[number] = { ...result, isPerfect };
+      numbers.forEach(({ number, factors }) => {
+        const result = checkAnswer(number, factors);
+        const isPerfect = result.correct.length === factors.length;
+        newResults[number] = { ...result, isPerfect };
 
-      if (isPerfect) totalScore++;
-    });
+        if (isPerfect) totalScore++;
+      });
 
-    setResults(newResults);
-    setScore(totalScore);
-    setChecked(true);
+      setResults(newResults);
+      setScore(totalScore);
+      setChecked(true);
     } else {
       setUserAnswers({});
       setResults({});
@@ -84,28 +84,22 @@ const FullQuizLevel = () => {
 
   return (
     <div className="factor-quiz-container">
-      {/* <h1 className="quiz-title">Ultimate Factor Challenge</h1> */}
-        <h1 className="quiz-title">1-100 因數大考驗</h1>
-       
-        <h1 className="quiz-title">- 高手挑戰</h1>
+      <h1 className="quiz-title">1-100 Factor Challenge - Master Level</h1>
 
       <p className="quiz-subtitle">
-        {/* Enter all factors for each number (separated by commas). When you’re
-        ready, click “Check All Answers” to see your score! */}
-        輸入每個數字的所有因數（以逗號分隔）。準備好後，點擊「檢查所有答案」以查看您的分數！
+        Enter all factors for each number (separated by commas). When you're
+        ready, click "Check All Answers" to see your score!
       </p>
 
       <div className="button-bar">
         <button className={`btn ${checked ? "btn-retry" : "btn-checkall"}`} onClick={handleCheckAll}>
-          {checked ? "再試一次" : "檢查所有答案"}
+          {checked ? "Try Again" : "Check All Answers"}
         </button>
       </div>
 
-
       {checked && (
         <div className="score-display">
-          {/* Your Score: {score} / {numbers.length} */}
-            您的分數：{score} / {numbers.length}
+          Your Score: {score} / {numbers.length}
         </div>
       )}
 
@@ -127,8 +121,7 @@ const FullQuizLevel = () => {
               <div className="number-header">
                 <h3 className="number-title">{number}</h3>
                 {showPrimeBadge && (
-                //   <span className="prime-badge">PRIME</span>
-                    <span className="prime-badge">質數</span>
+                  <span className="prime-badge">PRIME</span>
                 )}
               </div>
 
@@ -143,14 +136,11 @@ const FullQuizLevel = () => {
               {checked && result && (
                 <div className="result-summary">
                   {isPerfect ? (
-                    // <span className="result-perfect">✅ Perfect!</span>
-                    <span className="result-perfect">🎉 完美！全部正確！</span>
+                    <span className="result-perfect">🎉 Perfect! All correct!</span>
                   ) : (
                     <>
-                      {/* <div>✅ {result.correct.length} correct</div>
-                      <div>⚠ {result.missing.length} missing</div> */}
-                        <div>✅ 答對 {result.correct.length} 個因數</div>
-                        <div>⚠ 尚缺 {result.missing.length} 個因數 （請補充）</div>
+                      <div>✅ {result.correct.length} correct</div>
+                      <div>⚠ {result.missing.length} missing</div>
                     </>
                   )}
                 </div>
@@ -160,19 +150,19 @@ const FullQuizLevel = () => {
         })}
       </div>
 
-      {/* <div className="instructions">
+      <div className="instructions">
         <h2>Instructions:</h2>
         <ul>
           <li>Type all factors separated by commas (e.g., "1, 2, 4").</li>
           <li>
-            Prime numbers will be revealed as <strong>“PRIME”</strong> only after
+            Prime numbers will be revealed as <strong>"PRIME"</strong> only after
             you find all their factors correctly.
           </li>
           <li>You can change your answers anytime.</li>
-          <li>Click “Check All Answers” again to update your score.</li>
+          <li>Click "Check All Answers" again to update your score.</li>
           <li>Green cards are perfect; red cards need more work.</li>
         </ul>
-      </div> */}
+      </div>
     </div>
   );
 };
