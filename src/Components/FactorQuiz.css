@@ -101,7 +101,7 @@
   background-color: #f3f4f6;
 }
 
-.btn-submit, .btn-retry .btn-checkall{
+.btn-submit, .btn-retry, .btn-checkall{
   width: 100%;
   padding: 6px 10px;
   border-radius: 6px;
