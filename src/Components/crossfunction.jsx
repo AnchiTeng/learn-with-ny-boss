@@ -3,6 +3,120 @@ import './QuestionPage.css';
 
 const CrossFunction = () => {
   const [showOriginal, setShowOriginal] = useState(false);
+  const [useShort, setUseShort] = useState(false);
+
+  const toggleOriginal = () => {
+    setShowOriginal(!showOriginal);
+    if (!showOriginal) {
+      setTimeout(() => { scrollToSection('original-notes'); }, 100);
+    }
+  };
+
+  // highlight helper
+const escapeForRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+const Highlight = ({ text, terms = [] }) => {
+  if (!terms.length) return text;
+  const pattern = new RegExp(`(${terms.map(escapeForRegExp).join('|')})`, 'gi');
+  const parts = String(text).split(pattern);
+  return parts.map((part, i) =>
+    pattern.test(part) ? <mark key={i} className="hl">{part}</mark> : <React.Fragment key={i}>{part}</React.Fragment>
+  );
+};
+
+const STORY = [
+  { text: "When we were scaling and onboarding new Sales and Success hires, I noticed demos were often booked with clients before our team received an intake ticket.", highlight: false },
+  { text: "And the tickets we did get often only had date/time, without info on the demo type, attendees, or campaign details.", highlight: false },
+  { text: "This meant the first demo sometimes missed the mark and we needed a second call.", highlight: true }, // PROBLEM
+
+  { text: "I solved it at the workflow level.", highlight: true }, // ACTION
+  { text: "I partnered with our Zendesk admin to add required fields with conditional logic, so requesters had to choose demo type and include technical level plus campaign mechanics.", highlight: false },
+  { text: "For edge cases, I built a Zendesk macro to standardize clarifying questions.", highlight: false },
+
+  { text: "After socializing the change, about 90% of requests came in with actionable context, and repeat demos dropped by ~50%.", highlight: true }, // IMPACT
+
+  { text: "Takeaway: great client outcomes start with clean inputs.", highlight: true }, // LEARNING
+  { text: "Tighten the input contract, reduce variance, and you get first-time-right delivery.", highlight: false },
+  { text: "Now, when issues recur, I first check whether the workflow needs adjustment.", highlight: false },
+];
+
+// 30s micro version: only the 4 anchors
+const STORY_SHORT = [
+  { text: "We were booking demos without proper intake, so the first call often missed the mark and triggered a second call.", highlight: true },
+  { text: "I partnered with our Zendesk admin to add required fields with conditional logic and built a Zendesk macro to standardize clarifications.", highlight: true },
+  { text: "After rollout, ~90% of requests arrived with usable context and repeat demos dropped ~50%.", highlight: true },
+  { text: "Lesson: tighten the input contract to reduce variance and get first-time-right delivery.", highlight: true },
+];
+
+
+
+
+const HOOKS = [
+  'inconsistent inputs',
+  'input contract',
+  'without context',
+];
+
+const KEYWORDS = [
+  'inconsistent inputs',
+  'missing context',
+  'required fields',
+  'conditional logic',
+  'Zendesk macro',
+  '90%',
+  '50%',
+  'input contract',
+  'first-time-right'
+];
+
+
+
+const OriginalNotes = () => (
+  <article className="notes-body">
+   
+
+    <h3>Optional Opening Hook (pick one)</h3>
+    <ul className="bullet">
+      <li><Highlight text='We were seeing "inconsistent inputs" that created rework.' terms={HOOKS} /></li>
+      <li><Highlight text='This was basically an "input contract" problem.' terms={HOOKS} /></li>
+      <li><Highlight text='We kept going into demos "without context", so I fixed the source.' terms={HOOKS} /></li>
+    </ul>
+
+    <hr />
+
+    <h3>45–60s Hybrid Version</h3>
+    {STORY.map((item, i) => (
+  <p key={i} className={item.highlight ? "highlight-line" : ""}>
+    {item.text}
+  </p>
+))}
+
+
+    
+
+    <hr />
+
+    <h4>Keywords to sprinkle in (lightly)</h4>
+    <div className="chips">
+      {['input contract','coverage','repeatability','variance reduction','first-time-right','conformance'].map((k) => (
+        <span key={k} className="chip">{k}</span>
+      ))}
+    </div>
+  </article>
+);
+
+const OriginalNotesShort = () => (
+  <article className="notes-body short">
+    <h3>~30s Micro Version</h3>
+   {STORY_SHORT.map((item, i) => (
+  <p key={i} className={item.highlight ? "highlight-line" : ""}>
+    {item.text}
+  </p>
+))}
+
+  </article>
+);
+
+
 
   // 滾動到指定部分
   const scrollToSection = (sectionId) => {
@@ -21,51 +135,39 @@ const CrossFunction = () => {
       top: 0,
       behavior: 'smooth'
     });
+    setShowOriginal(false);
   };
 
-  // 切換原文顯示
-  const toggleOriginal = () => {
-    setShowOriginal(!showOriginal);
-    if (!showOriginal) {
-      // 如果切換到原文模式，滾動到原文區域
-      setTimeout(() => {
-        scrollToSection('original-notes');
-      }, 100);
-    }
-  };
-
+  
   // 你的原始筆記內容
-  const originalNotes = `
-When asked: "Tell me about a time you improved a cross-functional process" or "How do you ensure technical accuracy in client engagements?"
+//  const originalNotes = `Hybrid STAR Answer - Ad Tech QA / Certification Lens
 
-Cross-Functional Intake
+// Optional Opening Hook options (pick just one, short):
+// - "We were seeing inconsistent inputs that created rework."
+// - "This was basically an input contract problem."
+// - "We kept going into demos without context, so I focused on fixing the source."
 
-S: During a period when our company was scaling and we brought on new hires, I noticed a recurring issue with the new Sales and Success team members. They were scheduling product demos and walkthroughs with clients before submitting requests to our Creative Support team. The requests that were submitted only contained a date and a time, but lacked essential background information.
+// ---
 
-P: Our support team was already committed to a date and a time, but didn't know what type of walk thru was needed, who the meeting attendees were, type of creatives needed to be built, or relevant campaign details. When the support team followed up with clarifying questions on the ticket they, often went unanswered so we would default to a standard onboarding demo. 
+// 45-60 sec Hybrid Version (structured but natural tone)
 
-Following the demos, while clients usually appreciated the walk through, often times a second call was needed with more curated information to meet the specific client needs that were identified during the call. It was inefficient and in the worst cases it would even delay client onboarding. Once, a client openly expressed that they didn't feel their time was used productively.
+// When we were scaling and onboarding new Sales and Success hires, I started noticing a pattern — demos were often being booked with clients before our team received an intake ticket. And when we did receive the ticket, it often only had the date and time, with no information about what type of demo was needed, who was attending, or any campaign/context details. The result was: sometimes the first demo wasn’t aligned with the client’s actual needs, and we’d end up needing a second call. It was inefficient and didn’t feel good from a client experience standpoint.
 
-S: I initiated a redesign to our intake process. 
-1 Collaborating with our Zendesk admin we added required fields with conditional logic that would guide the requester to provide info about the type of demo up front:  
-pre-sales product evaluation, 
-client onboarding, 
-troubleshooting help
-This allowed the process to enforce the requirements.
+// I decided to fix this at the workflow level, not at the ticket-by-ticket level. I partnered with our Zendesk admin to add required fields with conditional logic so the requester had to identify the demo type up front (pre-sales evaluation, onboarding, troubleshooting) along with key context like technical level of attendees and campaign mechanics. I also built a Zendesk macro that standardized follow-up clarifying questions, so the support team could quickly get missing info in a consistent way.
 
-2 If submitted tickets still required more details, I also built a ZD macro that the support team could use to quickly populate a response with clarifying questions about, 
-whether the client meeting attendees were technical or not
-details about the campaign needs (like targeting requirements, if a feed was being used, etc..)
-any available information about the client workflow or preferred tools
+// After I socialized the changes with Sales and Success — including examples of strong vs weak submissions — about 90% of requests came in with actionable context, and repeat demos dropped by ~50%. Our APAC and EMEA teams later adapted the macro with region-specific needs as well.
 
-3 To drive adoption, I didn't just roll it out — I socialized it by sending a short email to Sales and Success explaining why the updated process would save them time (fewer re-schedules, happier clients) and included examples of strong vs. weak requests. I offered to jump on a quick sync with any team lead who wanted to walk through it.
+// My takeaway from this was: great client outcomes start with clean inputs. If you tighten the input contract, you reduce variance and improve first-time-right delivery. So now, any time I see a recurring issue, I check whether the workflow itself needs adjustment — not just the individuals sending the requests.
 
-I: The impact was immediate, ~90% of tickets included actionable context, and follow-up demo requests dropped by about 50%. More importantly, client feedback shifted and our team often received comments like 'This demo was just what we needed'. Also, since the framework was flexible, our APAC and EMEA teams adapted the macro to include region-specific questions.
+// ---
 
-Learning
-What I gained from this was an understanding that great client experiences start with the smoothing out of internal operations
-From that point anytime issues appeared to be recurring, I would first look at the bigger picture to evaluate if it was systemic and how modifying operational processes could.
-  `;
+// Keywords I can sprinkle in lightly if they fit naturally:
+// - input contract
+// - coverage / repeatability
+// - variance reduction
+// - first-time-right
+// - conformance`;
+
 
   return (
     <div className="question-page">
@@ -148,15 +250,22 @@ From that point anytime issues appeared to be recurring, I would first look at t
 
       {/* 根據模式顯示不同內容 */}
       {showOriginal ? (
-        /* 原文筆記模式 */
         <div id="original-notes" className="original-notes">
           <div className="notes-header">
-            <h1>📝 Original Notes: Cross-functional Process Improvement</h1>
-            <button onClick={scrollToTop} className="back-to-top">↑ Top</button>
+            <h1>📝 Q:  Cross-functional Process Improvement</h1>
+            <div className="notes-header-actions">
+              <button onClick={() => setUseShort(false)} className={`switch-mode-btn ${!useShort ? 'active' : ''}`}>
+                Long (45–60s)
+              </button>
+              <button onClick={() => setUseShort(true)} className={`switch-mode-btn ${useShort ? 'active' : ''}`}>
+                Short (~30s)
+              </button>
+              <button onClick={scrollToTop} className="back-to-top">↑ Top</button>
+            </div>
           </div>
-          
+
           <div className="notes-content">
-            <pre>{originalNotes}</pre>
+            {useShort ? <OriginalNotesShort /> : <OriginalNotes />}
           </div>
 
           <div className="notes-actions">

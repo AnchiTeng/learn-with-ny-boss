@@ -295,6 +295,12 @@
     padding: 20px;
   }
 }
+.highlight-line {
+  background: #fff3b0;   /* soft yellow */
+  padding: 2px 4px;
+  border-radius: 4px;
+  font-weight: 600;
+}
 
 
 /* 添加到現有的 QuestionPage.css 中 */
@@ -456,6 +462,7 @@
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.3s ease;
+  margin: 8px;
 }
 
 .switch-mode-btn:hover {
@@ -490,4 +497,6 @@
     gap: 15px;
     text-align: center;
   }
+  
+
 }
