@@ -1,45 +1,172 @@
-/* #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+/* App.css */
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(135deg, #4a90e2, #357abd);
+  padding: 15px 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+/* 左側區域 - Facebook Link */
+.nav-left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 中間區域 - 導航連結 */
+.nav-center {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  
+}
+
+/* 右側區域 - 語言切換 */
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+
+/* Facebook 連結樣式 */
+.fb-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: white;
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.fb-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+.fb-icon {
+  width: 20px;
+  height: 20px;
+  fill: white;
+}
+
+.fb-text {
+  font-size: 0.9rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* 導航連結樣式 */
+.nav-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  font-size: 1.3rem;
+}
+
+.nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* 語言切換按鈕 */
+.language-btn {
+  background-color: white;
+  color: #4a90e2;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.language-btn:hover {
+  background-color: #f8f9fa;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* 主要內容區域 */
+.content {
+  margin-top: 5px;
+  padding: 10px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
   }
-  to {
-    transform: rotate(360deg);
+  
+  .nav-left,
+  .nav-center,
+  .nav-right {
+    flex: none;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .nav-center {
+    order: 1;
+    font-size: 1.3rem;
+  }
+  
+  .nav-left {
+    order: 2;
+  }
+  
+  .nav-right {
+    order: 3;
+  }
+  
+  .fb-text {
+    display: inline; /* 在手機上顯示文字 */
+  }
+  .language-btn {
+    
+    padding: 8px 16px;
+  }
+  
+  .nav-link{
+    font-size: 1.2rem;
+    padding: 8px 12px;
   }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
+@media (max-width: 480px) {
+  .nav-center {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .fb-text {
+    font-size: 0.8rem;
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-} */
+/* 原有的其他樣式保持不變 */
 .App {
   font-family: Arial, sans-serif;
   text-align: center;
