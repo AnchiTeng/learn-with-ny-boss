@@ -1,81 +1,7 @@
 import { useState, useMemo } from 'react';
 import './InterviewDashboard.css';
 
-// 面试题目数据 - 根据你的实际内容修改
-// const INTERVIEW_QUESTIONS = [
-//     {
-//         id: 1,
-//         title: "cross-functional process",
-//         path: "/cross-functional process",
-//         category: "算法",
-//         difficulty: "medium",
-//         tags: ["二叉树", "遍历", "递归", "栈"],
-//         lastReviewed: "2024-01-15"
-//     },
-//     {
-//         id: 2,
-//         title: "什么是闭包？有什么作用和缺点？",
-//         path: "/javascript/closure",
-//         category: "JavaScript",
-//         difficulty: "easy",
-//         tags: ["闭包", "作用域", "内存泄漏"],
-//         lastReviewed: "2024-01-10"
-//     },
-//     {
-//         id: 3,
-//         title: "React Hooks 的使用规则和最佳实践",
-//         path: "/react/hooks-best-practices",
-//         category: "React",
-//         difficulty: "medium",
-//         tags: ["Hooks", "useState", "useEffect", "规则"],
-//         lastReviewed: "2024-01-12"
-//     },
-//     {
-//         id: 4,
-//         title: "TCP vs UDP 的区别",
-//         path: "/network/tcp-udp",
-//         category: "计算机网络",
-//         difficulty: "easy",
-//         tags: ["TCP", "UDP", "协议", "传输层"],
-//         lastReviewed: "2024-01-08"
-//     },
-//     {
-//         id: 5,
-//         title: "垂直水平居中的多种实现方式",
-//         path: "/css/center-alignment",
-//         category: "CSS",
-//         difficulty: "easy",
-//         tags: ["布局", "居中", "Flexbox", "Grid"],
-//         lastReviewed: "2024-01-05"
-//     },
-//     {
-//         id: 6,
-//         title: "虚拟DOM的原理和优势",
-//         path: "/react/virtual-dom",
-//         category: "React",
-//         difficulty: "medium",
-//         tags: ["虚拟DOM", "Diff算法", "性能优化"],
-//         lastReviewed: "2024-01-14"
-//     },
-//     {
-//         id: 7,
-//         title: "HTTP 和 HTTPS 的区别",
-//         path: "/network/http-https",
-//         category: "计算机网络",
-//         difficulty: "easy",
-//         tags: ["HTTP", "HTTPS", "SSL", "安全"],
-//         lastReviewed: "2024-01-09"
-//     },
-//     {
-//         id: 8,
-//         title: "箭头函数和普通函数的区别",
-//         path: "/javascript/arrow-function",
-//         category: "JavaScript",
-//         difficulty: "easy",
-//         tags: ["箭头函数", "this", "函数"],
-//         lastReviewed: "2024-01-11"
-//     }
-// ];
+
 const INTERVIEW_QUESTIONS = [
   {
     id: 1,
@@ -220,23 +146,11 @@ const CATEGORIES = ['All', 'Process Optimization', 'Technical Innovation', 'Proc
 
 export default function InterviewDashboard() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('全部');
+  //const [selectedCategory, setSelectedCategory] = useState('全部');
   const [selectedCategories, setSelectedCategories] = useState([]); // 改為數組來存儲多個選擇
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
 
-//   // 过滤题目
-//   const filteredQuestions = useMemo(() => {
-//     return INTERVIEW_QUESTIONS.filter(question => {
-//       const matchesSearch = question.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-//                           question.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
-      
-//       const matchesCategory = selectedCategory === '全部' || question.category === selectedCategory;
-      
-//       const matchesDifficulty = selectedDifficulty === '全部' || question.difficulty === selectedDifficulty;
-      
-//       return matchesSearch && matchesCategory && matchesDifficulty;
-//     });
-//   }, [searchTerm, selectedCategory, selectedDifficulty]);
+
  // 過濾題目
   const filteredQuestions = useMemo(() => {
     return INTERVIEW_QUESTIONS.filter(question => {
@@ -289,136 +203,7 @@ export default function InterviewDashboard() {
     setSelectedDifficulty('All');
   };
 
-//   return (
-//     <div className="interview-dashboard">
-//       {/* 头部搜索区 */}
-//       <header className="dashboard-header">
-//         <h1>💼 Interview Notes</h1>
-//         <p>Do Your Best and You Will Be Blessed</p>
-        
-//         <div className="search-section">
-//           <div className="search-box">
-//             <input
-//               type="text"
-//               placeholder="use keyword to filter，ex cross functional..."
-//               value={searchTerm}
-//               onChange={(e) => setSearchTerm(e.target.value)}
-//               autoFocus
-//               className="search-input"
-//             />
-//             {searchTerm && (
-//               <button 
-//                 className="clear-search" 
-//                 onClick={() => setSearchTerm('')}
-//               >
-//                 ✕
-//               </button>
-//             )}
-//           </div>
-          
-//           <button 
-//             className="clear-filters-btn"
-//             onClick={clearFilters}
-//           >
-//             clear filters
-//           </button>
-//         </div>
-//       </header>
 
-//       {/* 筛选器 */}
-//       <div className="filters">
-//         <div className="filter-group">
-//           <label>CATEGORIES：</label>
-//           <div className="category-tabs">
-//             {CATEGORIES.map(category => (
-//               <button
-//                 key={category}
-//                 className={`category-tab ${selectedCategory === category ? 'active' : ''}`}
-//                 onClick={() => setSelectedCategory(category)}
-//               >
-//                 {category}
-//               </button>
-//             ))}
-//           </div>
-//         </div>
-        
-//         <div className="filter-group">
-//           <label>难度：</label>
-//           <select 
-//             value={selectedDifficulty} 
-//             onChange={(e) => setSelectedDifficulty(e.target.value)}
-//             className="difficulty-select"
-//           >
-//             <option value="全部">全部</option>
-//             <option value="easy">简单</option>
-//             <option value="medium">中等</option>
-//             <option value="hard">困难</option>
-//           </select>
-//         </div>
-//       </div>
-
-//       {/* 结果统计 */}
-//       <div className="results-info">
-//         <span>找到 {filteredQuestions.length} 个题目</span>
-//         {searchTerm && (
-//           <span>搜索词: "{searchTerm}"</span>
-//         )}
-//       </div>
-
-//       {/* 题目列表 */}
-//       <div className="questions-grid">
-//         {filteredQuestions.map(question => (
-//           <div key={question.id} className="question-card">
-//             <div className="card-header">
-//               <h3 className="question-title">
-//                 <a 
-//                   href={`/finn1219${question.path}`}
-//                   className="question-link"
-//                   onClick={(e) => {
-//                     // 如果是本地路由，可以使用 navigate
-//                     // 如果是外部链接，直接跳转
-//                     console.log('导航到:', question.path);
-//                     // 如果使用 React Router，可以在这里添加导航逻辑
-//                   }}
-//                 >
-//                   {question.title}
-//                 </a>
-//               </h3>
-//               <span 
-//                 className="difficulty-badge"
-//                 style={{ backgroundColor: DIFFICULTY_COLORS[question.difficulty] }}
-//               >
-//                 {question.difficulty === 'easy' ? '简单' : 
-//                  question.difficulty === 'medium' ? '中等' : '困难'}
-//               </span>
-//             </div>
-            
-//             <div className="card-meta">
-//               <span className="category">{question.category}</span>
-//               <span className="last-reviewed">最后复习: {question.lastReviewed}</span>
-//             </div>
-            
-//             <div className="tags">
-//               {question.tags.map(tag => (
-//                 <span key={tag} className="tag">{tag}</span>
-//               ))}
-//             </div>
-//           </div>
-//         ))}
-//       </div>
-
-//       {/* 无结果状态 */}
-//       {filteredQuestions.length === 0 && (
-//         <div className="empty-state">
-//           <h3>没有找到匹配的题目</h3>
-//           <p>尝试调整搜索词或筛选条件</p>
-//           <button onClick={clearFilters} className="clear-filters-btn">
-//             清空所有筛选条件
-//           </button>
-//         </div>
-//       )}
-//     </div>
-//   );
 return (
     <div className="interview-dashboard">
       {/* 頭部搜索區 */}

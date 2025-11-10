@@ -7,6 +7,14 @@ import EnLevel1 from "./Components/En-level1.jsx";
 import EnLevel2 from "./Components/En-level2.jsx";
 import EnLevel3 from "./Components/En-level3.jsx";
 import InterviewDashboard from "./Components/Interview.jsx";
+import DCOOH from "./Components/DCOOH.jsx";
+import TrackingRCA from "./Components/TrackingRCA.jsx";
+import UnifiedTaxonomy from "./Components/UnifiedTaxonomy.jsx";
+import KnowledgeSharing from "./Components/KnowledgeSharing.jsx";
+import MRCAudit from "./Components/MRCAudit.jsx";
+import AudienceCommunication from "./Components/AudienceCommunication.jsx";
+import FlashToHTML5 from "./Components/FlashToHTML5.jsx";
+
 
 import "./App.css";
 import CrossFunction from "./Components/crossfunction.jsx";
@@ -137,14 +145,20 @@ function App() {
            
            {/* 暂时全部指向 CrossFunction */}
   <Route path="/finn1219/cross-functional-process" element={<CrossFunction />} />
-  <Route path="/finn1219/javascript/closure" element={<CrossFunction />} />
-  <Route path="/finn1219/react/hooks-best-practices" element={<CrossFunction />} />
-  <Route path="/finn1219/network/tcp-udp" element={<CrossFunction />} />
+  <Route path="/finn1219/dco-outdoor-media" element={<DCOOH />} />
+  <Route path="/finn1219/tracking-analysis" element={<TrackingRCA />} />
+  <Route path="/finn1219/unified-taxonomy" element={<UnifiedTaxonomy />} />
+  <Route path="/finn1219/knowledge-sharing" element={<KnowledgeSharing />} />
+  <Route path="/finn1219/audience-communication" element={<AudienceCommunication />} />
+<Route path="/finn1219/flash-html5-transition" element={<FlashToHTML5 />} />
+
+
   <Route path="/finn1219/css/center-alignment" element={<CrossFunction />} />
   <Route path="/finn1219/react/virtual-dom" element={<CrossFunction />} />
   <Route path="/finn1219/network/http-https" element={<CrossFunction />} />
   <Route path="/finn1219/javascript/arrow-function" element={<CrossFunction />} />
-          
+    <Route path="/finn1219/mrc-audit" element={<MRCAudit />} />
+      
          
           
           {/* 其他页面路由 */}
