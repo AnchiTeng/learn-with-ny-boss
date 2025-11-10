@@ -14,6 +14,7 @@ import KnowledgeSharing from "./Components/KnowledgeSharing.jsx";
 import MRCAudit from "./Components/MRCAudit.jsx";
 import AudienceCommunication from "./Components/AudienceCommunication.jsx";
 import FlashToHTML5 from "./Components/FlashToHTML5.jsx";
+import InterviewQAFinder from "./Components/TechQA.jsx";
 
 
 import "./App.css";
@@ -153,7 +154,7 @@ function App() {
 <Route path="/finn1219/flash-html5-transition" element={<FlashToHTML5 />} />
 
 
-  <Route path="/finn1219/css/center-alignment" element={<CrossFunction />} />
+  <Route path="/finn1219/tech-qa" element={<InterviewQAFinder />} />
   <Route path="/finn1219/react/virtual-dom" element={<CrossFunction />} />
   <Route path="/finn1219/network/http-https" element={<CrossFunction />} />
   <Route path="/finn1219/javascript/arrow-function" element={<CrossFunction />} />

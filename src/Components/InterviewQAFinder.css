@@ -1,0 +1,304 @@
+/* ========== Base Layout ========== */
+.iqaf {
+  --bg: #fff;
+  --text: #0f172a;
+  --muted: #64748b;
+  --line: #e5e7eb;
+  --brand: #111827;
+  --chip: #f3f4f6;
+  --chip-active: #0f172a;
+  --chip-active-text: #ffffff;
+  --hl: #fde68a;
+
+  color: var(--text);
+  background: var(--bg);
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  /* 兩欄主框架：左側固定寬，右側彈性；大螢幕不會壓縮右側 */
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 16px;
+  padding: 12px 16px 24px;
+}
+
+/* 小螢幕自動改為單欄 */
+@media (max-width: 900px) {
+  .iqaf {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
+/* sticky 頂部工具列 */
+.iqaf__header {
+  grid-column: 1 / -1;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  background: var(--bg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.iqaf__title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* ========== Left Pane (controls + results) ========== */
+.iqaf__left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  /* 讓左欄在大量內容時可獨立捲動 */
+  max-height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+.iqaf__search {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  background: #fff;
+}
+
+.iqaf__input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.iqaf__input:focus {
+  border-color: #cbd5e1;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.12);
+}
+
+.iqaf__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.iqaf__chip {
+  border: 1px solid var(--line);
+  background: var(--chip);
+  color: var(--text);
+  padding: 6px 10px;
+  line-height: 1;
+  border-radius: 999px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.iqaf__chip--active {
+  background: var(--chip-active);
+  color: var(--chip-active-text);
+  border-color: var(--chip-active);
+}
+
+.iqaf__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 8px;
+  font-size: 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: #fafafa;
+  color: var(--muted);
+}
+
+.iqaf__list {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 8px;
+  overflow: auto;
+  /* 讓清單自己滾，不影響右欄 */
+  flex: 1 1 auto;
+  min-height: 200px;
+}
+
+.iqaf__item {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 10px;
+  cursor: pointer;
+  background: #fff;
+  transition: background 120ms ease, border-color 120ms ease;
+}
+
+.iqaf__item + .iqaf__item {
+  margin-top: 8px;
+}
+
+.iqaf__item:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+}
+
+.iqaf__item-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.iqaf__item-snippet {
+  font-size: 13px;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;        /* 多行截斷 */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.iqaf__meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.iqaf__empty {
+  color: var(--muted);
+  font-size: 13px;
+  text-align: center;
+  padding: 16px 8px;
+}
+
+/* ========== Right Pane (reader) ========== */
+.iqaf__right {
+  /* 右側一定要可彈性填滿 + 可縮：關鍵兩行避免右側變窄 */
+  min-width: 0;
+  width: 100%;
+
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #fff;
+  padding: 14px 16px;
+  box-sizing: border-box;
+
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+}
+
+.iqaf__group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 10px;
+}
+
+.iqaf__group h2 {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin: 0;
+  white-space: nowrap;
+}
+
+.rule {
+  flex: 1 1 auto;
+  height: 1px;
+  background: var(--line);
+}
+
+.iqaf__qa {
+  padding: 10px 0;
+}
+
+.iqaf__qa + .iqaf__qa {
+  border-top: 1px dashed var(--line);
+}
+
+.qa__q {
+  font-size: 15px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.qa__a {
+  font-size: 14px;
+  color: #0b1220;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
+}
+
+/* ========== Highlight / Panic ========== */
+.hl {
+  background: var(--hl);
+  color: #111827;
+  padding: 0 2px;
+  border-radius: 3px;
+}
+
+.iqaf__panic {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--brand);
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.iqaf__panic:hover {
+  background: #f8fafc;
+}
+
+/* Panic Mode：右欄加大字體、增加行高；左欄保持原大小以便搜尋 */
+.iqaf.iqaf--panic .iqaf__right {
+  font-size: 18px;
+  line-height: 1.8;
+}
+
+.iqaf.iqaf--panic .qa__q {
+  font-size: 20px;
+}
+
+.iqaf.iqaf--panic .qa__a {
+  font-size: 18px;
+}
+
+/* ========== Scrollbars (optional,美觀) ========== */
+.iqaf__list::-webkit-scrollbar,
+.iqaf__right::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.iqaf__list::-webkit-scrollbar-thumb,
+.iqaf__right::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border: 2px solid #f1f5f9;
+  border-radius: 10px;
+}
+.iqaf__list::-webkit-scrollbar-track,
+.iqaf__right::-webkit-scrollbar-track {
+  background: #f8fafc;
+  border-radius: 10px;
+}
+
+/* ========== Reduced Motion ========== */
+@media (prefers-reduced-motion: reduce) {
+  .iqaf__item { transition: none; }
+}
+
+/* ========== Safe Defaults ========== */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

@@ -18,76 +18,83 @@ const TrackingRCA = () => {
   const toggleOriginal = () => {
     setShowOriginal((v) => !v);
     if (!showOriginal) {
-      setTimeout(() => { scrollToSection('original-notes'); }, 100);
+      setTimeout(() => {
+        scrollToSection('original-notes');
+      }, 100);
     }
   };
 
   // optional keyword marker (same helper signature as your other page)
   const escapeForRegExp = (s) => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  
   const Highlight = ({ text, terms = [] }) => {
     if (!terms.length) return text;
     const pattern = new RegExp(`(${terms.map(escapeForRegExp).join('|')})`, 'gi');
     const parts = String(text).split(pattern);
-    return parts.map((part, i) =>
+    return parts.map((part, i) => 
       pattern.test(part) ? <mark key={i} className="hl">{part}</mark> : <React.Fragment key={i}>{part}</React.Fragment>
     );
   };
 
   // ------------------ CONTENT (SPSIL) ------------------
-
   // 45–60s story: keep the 4 anchors highlighted, rest plain
   const STORY = [
     { text: "We started seeing large reporting discrepancies on campaigns using custom product-level tracking in dynamic creatives.", highlight: false },
     { text: "Clients questioned the data; we were issuing make-goods; teams were in fire-drill mode across reporting, solutions, production, and campaign ops.", highlight: false },
-    { text: "The real issue wasn’t obvious: teams worked in silos with outdated, conflicting docs — events fired inconsistently, product IDs were missing, and no one agreed on where the break was.", highlight: true }, // PROBLEM
-
+    { text: "The real issue wasn't obvious: teams worked in silos with outdated, conflicting docs — events fired inconsistently, product IDs were missing, and no one agreed on where the break was.", highlight: true }, // PROBLEM
     { text: "I led a cross-functional root cause analysis and treated it as governance — not a one-off debug.", highlight: true }, // ACTION (frame)
     { text: "I traced the pipeline end-to-end: reviewed creative code, compared the dynamic API vs the tracking library, audited live tags, and followed data into the reporting backend.", highlight: false },
-    { text: "We found the mismatch: the creative API expected abbreviated methods while the tracking library supported richer events that required extra setup — the docs didn’t reflect this.", highlight: false },
-
+    { text: "We found the mismatch: the creative API expected abbreviated methods while the tracking library supported richer events that required extra setup — the docs didn't reflect this.", highlight: false },
     { text: "With product bandwidth limited, I authored role-specific implementation guides, ran enablement sessions, and aligned everyone on a single, reliable workflow.", highlight: false },
     { text: "Within two months, tracking-related tickets dropped by 90%+, billing disputes fell, and clients regained trust in the numbers.", highlight: true }, // IMPACT
-
     { text: "My takeaway: the biggest risks live between teams — clear, role-targeted documentation is an engineering control, not an afterthought.", highlight: true }, // LEARNING
     { text: "Even before the API could be patched, the process fix created a sustainable, low-friction workaround used for years.", highlight: false },
   ];
-  
 
   // ~30s micro version: just the 4 anchors
   const STORY_SHORT = [
-    { text: "Custom product-level tracking showed big discrepancies; teams were siloed and docs conflicted — events and IDs didn’t line up.", highlight: true }, // PROBLEM
+    { text: "Custom product-level tracking showed big discrepancies; teams were siloed and docs conflicted — events and IDs didn't line up.", highlight: true }, // PROBLEM
     { text: "I led a cross-functional RCA: traced creative → API → tracking lib → reporting; found the API vs library mismatch behind inconsistent firing.", highlight: true }, // ACTION
     { text: "We standardized implementation with role-specific guides and training; tracking tickets dropped 90%+ and billing disputes fell.", highlight: true }, // IMPACT
     { text: "Lesson: fix the governance layer — documentation and enablement are quality controls that protect data integrity and client trust.", highlight: true }, // LEARNING
   ];
 
-  const HOOKS = [
-    "This wasn’t a code bug — it was a governance gap.",
-    "Data integrity broke in the handoffs, not the SQL.",
-    "We treated documentation like an engineering control."
-  ];
+  // 你的原文內容
+  const originalNotesContent = `
+4) Root Cause Analysis of Tracking Discrepancies
+Leading w/out formal authority
+technical governance / bridging gaps
+technical rigor, cross-functional leadership, and client impact
+
+"Outcome → Action → Impact" Format
+
+Outcome: I developed and implemented a comprehensive documentation and training strategy that virtually eliminated reporting discrepancies for custom product-level tracked dynamic creatives. This led to a 90% reduction in these tracking-related support tickets within two months. It also directly prevented potential financial losses from "make goods", restored client trust in our reporting data, and brought a unified understanding about how this type of tracking worked to multiple teams.
+
+Action: The core issue was a fundamental breakdown in communication and outdated documentation across siloed teams (campaign managers, solutions engineers, creative production, and reporting). No one could agree on where the tracking implementation was failing. I led a cross-functional root cause analysis, which involved: Interviewing stakeholders across all four teams. Auditing live creative code, our creative API, and the tracking library. Tracing the data flow into our reporting backend to pinpoint the mismatch between expected outputs and creative inputs. With product engineering resources stretched thin, I took ownership of the operational gap. I authored a comprehensive, role-specific implementation guide complete with annotated code examples for developers, checklists for solutions engineers, and plain-language explanations for campaign managers. I then ran hands-on sessions across all teams, aligning everyone on a single, reliable workflow and framing the initiative as collaborative problem-solving and knowledge sharing rather than blame.
+
+Impact: This initiative had a significant ripple effect across the organization. Beyond the immediate efficiency gains, it created a scalable, long-term operational workaround that is still in use years later, even with the underlying API discrepancy remaining unpatched. More importantly, the key takeaway for me was that the biggest operational risks often live in the communication gaps between teams, not just in the code itself. My role became about bridging those gaps—translating technical constraints into operational clarity—which is a skill I bring to all my projects to ensure long-term, sustainable solutions.
+  `;
 
   const OriginalNotes = () => (
     <article className="notes-body">
-      <h3>Optional Opening Hook (pick one)</h3>
-      <ul className="bullet">
-        {HOOKS.map((h, i) => <li key={i}>{h}</li>)}
-      </ul>
-
+      {/* 移除 Optional Opening Hook 部分，直接顯示你的原文 */}
+      <pre className="original-content">{originalNotesContent}</pre>
+      
       <hr />
-
+      
       <h3>45–60s Version</h3>
       {STORY.map((item, i) => (
         <p key={i} className={item.highlight ? "highlight-line" : ""}>
           {item.text}
         </p>
       ))}
-
+      
       <hr />
+      
       <h4>QA / Certification / Integration Fit</h4>
       <ul className="bullet compact">
         <li><Highlight text="Defines a single source of truth for implementation → certification checklists become enforceable." terms={[]} /></li>
-        <li><Highlight text="Prevents partner discrepancies by aligning API/library behavior with doc’d steps." terms={[]} /></li>
+        <li><Highlight text="Prevents partner discrepancies by aligning API/library behavior with doc'd steps." terms={[]} /></li>
         <li><Highlight text="Reduces operational variance — a core QA objective." terms={[]} /></li>
       </ul>
     </article>
@@ -121,7 +128,6 @@ const TrackingRCA = () => {
       <div className="quick-guide">
         <h2>🎯 Quick Response Guide</h2>
         <p className="click-hint">Click any section to jump to details</p>
-
         <div className="guide-cards">
           <div className="guide-card clickable" onClick={() => scrollToSection('situation')}>
             <h3>Situation</h3>
@@ -144,7 +150,6 @@ const TrackingRCA = () => {
             <p>Governance fixes protect data integrity</p>
           </div>
         </div>
-
         <div className="delivery-tips-sidebar">
           <h3>💡 Delivery Tips</h3>
           <ul>
@@ -167,11 +172,9 @@ const TrackingRCA = () => {
               <button onClick={scrollToTop} className="back-to-top">↑ Top</button>
             </div>
           </div>
-
           <div className="notes-content">
             {useShort ? <OriginalNotesShort /> : <OriginalNotes />}
           </div>
-
           <div className="notes-actions">
             <button onClick={toggleOriginal} className="switch-mode-btn">← Back to Structured Version</button>
           </div>
@@ -186,7 +189,6 @@ const TrackingRCA = () => {
               <span className="review-date">Last reviewed: 2024-01-20</span>
             </div>
           </header>
-
           <div className="interview-response">
             <section id="situation" className="response-section">
               <div className="section-header">
@@ -200,7 +202,6 @@ const TrackingRCA = () => {
                 <p>Reporting discrepancies escalated on dynamic creatives with custom product-level tracking; client trust and costs were at risk.</p>
               </div>
             </section>
-
             <section id="problem" className="response-section">
               <div className="section-header">
                 <h2>⚠️ Problem</h2>
@@ -213,7 +214,6 @@ const TrackingRCA = () => {
                 <p>Teams operated in silos with contradictory or outdated docs; events fired inconsistently and product IDs were missing — no clear owner of the truth.</p>
               </div>
             </section>
-
             <section id="solution" className="response-section">
               <div className="section-header">
                 <h2>💡 Solution</h2>
@@ -230,7 +230,6 @@ const TrackingRCA = () => {
                 </ul>
               </div>
             </section>
-
             <section id="impact" className="response-section">
               <div className="section-header">
                 <h2>📈 Impact</h2>
@@ -247,7 +246,6 @@ const TrackingRCA = () => {
                 </ul>
               </div>
             </section>
-
             <section id="learning" className="response-section">
               <div className="section-header">
                 <h2>🎓 Learning & Application</h2>
@@ -257,7 +255,7 @@ const TrackingRCA = () => {
                 </div>
               </div>
               <div className="response-content">
-                <p>The gaps between teams are where integrity fails. Treat documentation and enablement as engineering controls; that’s how QA, certification, and partner trust sustain at scale.</p>
+                <p>The gaps between teams are where integrity fails. Treat documentation and enablement as engineering controls; that's how QA, certification, and partner trust sustain at scale.</p>
               </div>
             </section>
           </div>
